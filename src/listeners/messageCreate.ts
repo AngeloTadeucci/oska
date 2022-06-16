@@ -9,6 +9,13 @@ export default (client: Client): void => {
             return;
         }
 
+        if (message.channel.id === Config.crossPostChannelId) {
+            message
+                .crosspost()
+                .then(() => console.log("Crossposted message"))
+                .catch(console.error);
+        }
+
         updateUserTimestamp(message.guild, message.author.id);
 
         if (!message.content.startsWith(Config.prefix)) {
